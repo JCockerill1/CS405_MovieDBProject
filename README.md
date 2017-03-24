@@ -1,5 +1,5 @@
-CS405 Spring 2017 Movie Project with Yii 2 Basic Project Template
-=================================================================
+CS405 Spring 2017 Movie Project with Yii 2 Basic Template
+==========================================================
 
 Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 rapidly creating small projects. The template contains the basic features including user login/logout and a contact page.
