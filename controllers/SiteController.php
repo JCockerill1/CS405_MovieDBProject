@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\UserForm;
 
 class SiteController extends Controller
 {
@@ -61,6 +62,18 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionCreateUser()
+    {
+        $model = new UserForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->create())
+        {
+            return $this->goBack();
+        }
+
+        return $this->render('create', ['model' => $model]);
     }
 
     /**
