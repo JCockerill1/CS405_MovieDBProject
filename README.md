@@ -1,16 +1,41 @@
-Yii 2 Basic Project Template
-============================
+CS405 Spring 2017 Movie Project with Yii 2 Basic Project Template
+=================================================================
 
 Yii 2 Basic Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-rapidly creating small projects.
-
-The template contains the basic features including user login/logout and a contact page.
+rapidly creating small projects. The template contains the basic features including user login/logout and a contact page.
 It includes all commonly used configurations that would allow you to focus on adding new
 features to your application.
 
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-basic/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-basic/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-basic.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-basic)
+INTRODUCTION
+------------
+
+This web application was developed as an assignment for CS405 taught 
+by Dr. Licong Cui. The backend of the application is a MySQL database
+with the following entities (tablenames):
+
+1. User
+2. Movie
+3. Genre
+4. Tag
+5. Crew
+6. UserReview
+7. MovieGenre
+8. MovieTag
+9. MovieCrew
+
+The frontend of the application was developed to include the following 
+functionality: 
+
+1. Allows users to register. 
+2. Allows the assignment of a registered user as a manager. 
+3. Allows a manager to add, update, and delete movies; 
+   categorize movies into one or more genres; 
+   and add, update, and delete movie crew. 
+4. Allows a registered user to find movies of interest using faceted 
+   search (i.e., search by title, genre, tag, and crew). 
+5. Allows a registered user to tag movies. 
+6. Allows a registered user to rate and comment movies. 
+
 
 DIRECTORY STRUCTURE
 -------------------
@@ -28,55 +53,49 @@ DIRECTORY STRUCTURE
       web/                contains the entry script and Web resources
 
 
+REQUIREMENTS - for project (NOT Yii2)
+-------------------------------------
 
-REQUIREMENTS
-------------
-
-The minimum requirement by this project template that your Web server supports PHP 5.4.0.
-
-
-INSTALLATION
-------------
-
-### Install via Composer
-
-If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
-at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
-
-You can then install this project template using the following command:
-
-~~~
-php composer.phar global require "fxp/composer-asset-plugin:^1.2.0"
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
-~~~
-
-Now you should be able to access the application through the following URL, assuming `basic` is the directory
-directly under the Web root.
-
-~~~
-http://localhost/basic/web/
-~~~
+This application was built using the Yii2 Framework for PHP with 
+PHP 7.1.3 on a Windows 10 machine. Any php IDE may be used to 
+further develop the project. PHPStorm was used on initial development 
+and is recommended.
 
 
-### Install from an Archive File
+INSTALLATION - for project (NOT Yii2)
+-------------------------------------
 
-Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
-a directory named `basic` that is directly under the Web root.
+### PHP 7.1 - http://windows.php.net/download/ (for Windows)
 
-Set cookie validation key in `config/web.php` file to some random secret string:
+Download the latest PHP 7 zip for your machine from the site above. 
+x64 for 64-bit operating system (x86 for 32-bit), Non Thread Safe. 
+Once downloaded, extract the contents of the zip to a location of your 
+choosing (e.g. C:\PHP\). Open the folder and find the file 
+php.ini-development. Open this file and uncomment the following lines:
 
-```php
-'request' => [
-    // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-    'cookieValidationKey' => '<secret random string goes here>',
-],
-```
+    extension=php_openssl.dll             <- needed for encryption
+    extension=php_pdo_mysql.dll           <- needed for mysql database
+    extension=php_gd2.dll                 <- needed for captcha images
 
-You can then access the application through the following URL:
+Save and close the file and rename it php.ini.
 
-~~~
-http://localhost/basic/web/
-~~~
+### Movie DB Project with Yii2
+
+Clone or download this project as an archived (.zip) file. Once complete, 
+extract the file at a location of your choosing. Afterwards, extract 
+the zipped vendor file in the same main project folder you previously 
+chose and remove the zipped file.
+
+
+DEVELOPMENT
+-----------
+
+Once you have the necessary files installed, you may proceed to development. 
+Open the php IDE of your choice and select the main project folder to 
+open the project. The project is broken down into a Model-View-Controller 
+(MVC) structure (see DIRECTORY STRUCTURE above). There are separate folders 
+for including specific application/database configuration parameters, testing, 
+and other scripts. 
 
 
 CONFIGURATION
@@ -84,7 +103,10 @@ CONFIGURATION
 
 ### Database
 
-Edit the file `config/db.php` with real data, for example:
+Before running this file, navigate to and edit the file `config/db.php` 
+with real parameter data for your database. The database should be 
+of the same structure as outlined in the INTRODUCTION above. The db.php 
+file will look similar to the following:
 
 ```php
 return [
@@ -102,107 +124,11 @@ return [
 - Refer to the README in the `tests` directory for information specific to basic application tests.
 
 
-
-TESTING
--------
-
-Tests are located in `tests` directory. They are developed with [Codeception PHP Testing Framework](http://codeception.com/).
-By default there are 3 test suites:
-
-- `unit`
-- `functional`
-- `acceptance`
-
-Tests can be executed by running
-
-```
-vendor/bin/codecept run
-``` 
-
-The command above will execute unit and functional tests. Unit tests are testing the system components, while functional
-tests are for testing user interaction. Acceptance tests are disabled by default as they require additional setup since
-they perform testing in real browser. 
-
-
-### Running  acceptance tests
-
-To execute acceptance tests do the following:  
-
-1. Rename `tests/acceptance.suite.yml.example` to `tests/acceptance.suite.yml` to enable suite configuration
-
-2. Replace `codeception/base` package in `composer.json` with `codeception/codeception` to install full featured
-   version of Codeception
-
-3. Update dependencies with Composer 
-
-    ```
-    composer update  
-    ```
-
-4. Download [Selenium Server](http://www.seleniumhq.org/download/) and launch it:
-
-    ```
-    java -jar ~/selenium-server-standalone-x.xx.x.jar
-    ```
-
-    In case of using Selenium Server 3.0 with Firefox browser since v48 or Google Chrome since v53 you must download [GeckoDriver](https://github.com/mozilla/geckodriver/releases) or [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) and launch Selenium with it:
-
-    ```
-    # for Firefox
-    java -jar -Dwebdriver.gecko.driver=~/geckodriver ~/selenium-server-standalone-3.xx.x.jar
-    
-    # for Google Chrome
-    java -jar -Dwebdriver.chrome.driver=~/chromedriver ~/selenium-server-standalone-3.xx.x.jar
-    ``` 
-    
-    As an alternative way you can use already configured Docker container with older versions of Selenium and Firefox:
-    
-    ```
-    docker run --net=host selenium/standalone-firefox:2.53.0
-    ```
-
-5. (Optional) Create `yii2_basic_tests` database and update it by applying migrations if you have them.
-
-   ```
-   tests/bin/yii migrate
-   ```
-
-   The database configuration can be found at `config/test_db.php`.
-
-
-6. Start web server:
-
-    ```
-    tests/bin/yii serve
-    ```
-
-7. Now you can run all available tests
-
-   ```
-   # run all available tests
-   vendor/bin/codecept run
-
-   # run acceptance tests
-   vendor/bin/codecept run acceptance
-
-   # run only unit and functional tests
-   vendor/bin/codecept run unit,functional
-   ```
-
-### Code coverage support
-
-By default, code coverage is disabled in `codeception.yml` configuration file, you should uncomment needed rows to be able
-to collect code coverage. You can run your tests and collect coverage with the following command:
-
-```
-#collect coverage for all tests
-vendor/bin/codecept run -- --coverage-html --coverage-xml
-
-#collect coverage only for unit tests
-vendor/bin/codecept run unit -- --coverage-html --coverage-xml
-
-#collect coverage for unit and functional tests
-vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
-```
-
-You can see code coverage output under the `tests/_output` directory.
+RUNNING APPLICATION
+-------------------
+This is a web application and may be ran for manual testing on your local 
+machine. As PHP 7 includes it's own built in web server, it's extremely 
+simple to run the application. Simply open the command line, navigate into 
+your main project folder, and run the following command - 
+  php yii serve
+Then open your web browser of choice and navigate to: localhost:8080
